@@ -25,6 +25,8 @@ def Search():
             #user makes choice here, need to find out how to keep them in bounds so they don't throw an exception
             rowInput = int(input("Row Selection: "))
 
+
+            ##bounderies check
             while numCheck == False:
                 try:
                     print(row[rowInput])
@@ -32,13 +34,9 @@ def Search():
                     numCheck = True
                     #**CHECK THIS, returning rowInput to keep the row number in an object.
                     return(x)
-                    #Should be planning to move out of this function at this point, take the information and move.
-                    #maybe storing in an object for easy scope work?
                     #move back to driver after you know what row to work in, take information to be remembered.
                 except IndexError:
                     # Index Out of Bound
-                    #if fail, return loop and start ober 
-                    #UPDATE: Inf loop on failure need to fix
                     print("value doesnt exist")
                     numCheck = True
             ticker += 1
@@ -66,14 +64,29 @@ def main():
 
         userMenu = input("Menu Input: ")
         
-        if userMenu == '1'
+        if userMenu == '1':
             print("Adding row....")
-        if userMenu == '2'
+            addRow()
+        if userMenu == '2':
             print("Deleting row....")
-        if userMenu == '3'
+        if userMenu == '3':
             print("Sorting row....")
-        if userMenu == '4'
+        if userMenu == '4':
             print("Modifying row....")
+
+
+def addRow():
+    print("Please insert row information")
+    rowInput = input("Please insert row information")
+    #fix this man
+    uhh = 1
+    while uhh == 1:
+        for row in reader:
+            uhh=2
+            print(row)
+
+
+
 
 main()
 #then what?
