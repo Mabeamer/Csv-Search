@@ -56,6 +56,7 @@ def main():
     print(file.columnSearch, ' || columnSearch')
 
     userMenu = '0'
+    #**TODO: menu loop
     while userMenu == '0':
         print("How do you wish to edit this file?")
         print("(1.)Add Row")
@@ -71,6 +72,7 @@ def main():
             print(addList)
         if userMenu == '2':
             print("Deleting row....")
+            removeRow()
         if userMenu == '3':
             print("Sorting row....")
         if userMenu == '4':
@@ -98,14 +100,27 @@ def addRow():
         userInformation.append(userInput)
 
     #adding information to csv
-    with open('us-area-code-cities.csv', 'a') as f_object:
-        writer_object = writer(f_object)
+    with open('us-area-code-cities.csv', 'a') as nFile:
+        newWriter = writer(nFile)
 
-        writer_object.writerow(userInformation)
-        f_object.close()
+        newWriter.writerow(userInformation)
+        nFile.close()
     return(userInformation)
     
+def removeRow():
+    x = 0
+    #container for all of the values
+    csvInformation = []
+    for row in reader:
+        csvInformation.append(row)
+        x+=1
+    #sanitation check; to avoid ZERO
+    print(len(csvInformation))
+    userInput = int(input("Please input the row number you wish to remove"))
+    print(csvInformation[userInput - 1])
+    print(x)
 
+    
 
 
 
