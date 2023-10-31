@@ -1,5 +1,6 @@
 import csv
 import sys
+from csv import writer
 
 #cv search function
 
@@ -66,7 +67,8 @@ def main():
         
         if userMenu == '1':
             print("Adding row....")
-            addRow()
+            addList = addRow()
+            print(addList)
         if userMenu == '2':
             print("Deleting row....")
         if userMenu == '3':
@@ -76,14 +78,33 @@ def main():
 
 
 def addRow():
-    print("Please insert row information")
-    rowInput = input("Please insert row information")
-    #fix this man
-    uhh = 1
-    while uhh == 1:
-        for row in reader:
-            uhh=2
-            print(row)
+    #declaring variables
+    userInformation = []
+
+    #reformat this, I dont know how to pull the number correctly so will hold it in a variable to be used as the row count
+    #inefficient, the loop is but we need to work around that
+    for row in reader:
+        rowInformation = row
+        lengthHolder = int(len(row))
+    
+    #**holding the len of the rows so the user can set it up
+    #print(lengthHolder)
+    #print(rowInformation)
+    for x in range(lengthHolder):
+        print("***Example Column***: ",rowInformation[x])
+        #*****TODO 1ST 2ND 3RD 4TH 5TH ect.*****
+        print("Please Input into row number ", x+1,":")
+        userInput = input('input:')
+        userInformation.append(userInput)
+
+    #adding information to csv
+    with open('us-area-code-cities.csv', 'a') as f_object:
+        writer_object = writer(f_object)
+
+        writer_object.writerow(userInformation)
+        f_object.close()
+    return(userInformation)
+    
 
 
 
