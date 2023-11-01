@@ -140,7 +140,7 @@ def removeRow():
 
     for row in csvInformation:
         if removedInformation not in row:
-            print('appending')
+            #print('appending')
             df._append(row)
         if removedInformation in row:
             print("**************************************************************************")
