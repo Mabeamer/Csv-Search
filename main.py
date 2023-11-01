@@ -1,6 +1,8 @@
 import csv
 import sys
 from csv import writer
+import os
+import pandas as pd
 
 #cv search function
 
@@ -60,7 +62,7 @@ def main():
     while userMenu == '0':
         print("How do you wish to edit this file?")
         print("(1.)Add Row")
-        print("(2.)Delete Row")
+        print("(2.)Delete Row  - !!This will write a new file to the main folder named outfile!!")
         print("(3.)Sort file")
         print("(4.)Modify column")
 
@@ -109,15 +111,49 @@ def addRow():
     
 def removeRow():
     x = 0
+    confirmation = False
     #container for all of the values
     csvInformation = []
+    removedInformation = []
     for row in reader:
         csvInformation.append(row)
         x+=1
     #sanitation check; to avoid ZERO
     print(len(csvInformation))
-    userInput = int(input("Please input the row number you wish to remove"))
-    print(csvInformation[userInput - 1])
+    while confirmation == False:
+        userInput = int(input("Please input the row number you wish to remove"))
+        print(csvInformation[userInput - 1])
+        userCon = input('Is this the correct row you wish to remove (Y/N)(1/0): ')
+        if userCon == '1':
+            print('Removing...')
+            #potenially bad
+            removedInformation.append(csvInformation[userInput - 1])
+            confirmation = True
+        else:
+            print('Leaving...')
+            print(userCon)
+            confirmation = False
+
+
+    #about to be rewriten
+    df = pd.DataFrame()
+
+    for row in csvInformation:
+        if removedInformation not in row:
+            print('appending')
+            df._append(row)
+        if removedInformation in row:
+            print("**************************************************************************")
+
+    df = df.dropna()
+
+    #Keep only the needed columns
+    #df = df.reindex(columns=['Name', 'Location'])
+    print(df.to_string())
+
+    df.to_csv('outfile', encoding='utf-8', index=False)
+
+
     print(x)
 
     
