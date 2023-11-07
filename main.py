@@ -108,13 +108,19 @@ def addRow():
         newWriter.writerow(userInformation)
         nFile.close()
     return(userInformation)
-    
+
+
+    #need to rewrite this
+#working
 def removeRow():
     x = 0
     confirmation = False
     #container for all of the values
     csvInformation = []
-    removedInformation = []
+    removedInformation = ''
+    updatedInfo = []
+    reader = csv.reader(open('us-area-code-cities.csv', encoding="utf8"))
+
     for row in reader:
         csvInformation.append(row)
         x+=1
@@ -127,34 +133,45 @@ def removeRow():
         if userCon == '1':
             print('Removing...')
             #potenially bad
-            removedInformation.append(csvInformation[userInput - 1])
+            #removedInformation.append(csvInformation[userInput - 1])
+            removedInformation = csvInformation[userInput - 1]
             confirmation = True
         else:
             print('Leaving...')
             print(userCon)
             confirmation = False
 
-
-    #about to be rewriten
-    df = pd.DataFrame()
-
+    #moving information around this can be written better        
+    #print('moving to row updates ', removedInformation)
     for row in csvInformation:
-        if removedInformation not in row:
-            #print('appending')
-            df._append(row)
-        if removedInformation in row:
-            print("**************************************************************************")
+        #this will find all versions of that if its the same,
+        #TODO:FIX CHECK SO THAT IT ERASES ONLY ONE VERSION
+        if removedInformation != row:
+            updatedInfo.append(row)
+            
+        
+    print(updatedInfo)    
+    #create list that contains an updated version of the users list, then write it to the file
+    #CSV SHOULD BE USERS FILE
+    file = open('outfile.csv', 'w+', newline='', encoding="utf-8")
 
-    df = df.dropna()
-
-    #Keep only the needed columns
-    #df = df.reindex(columns=['Name', 'Location'])
-    print(df.to_string())
-
-    df.to_csv('outfile', encoding='utf-8', index=False)
+    with file:
+        write = csv.writer(file)
+        write.writerows(updatedInfo)
+    
 
 
     print(x)
+
+
+#def searchRow():
+#should search through the full list for a specific row the user is looking for
+#can look from just the name, would prefer to have it reference the whole column in the search and display from a list
+
+
+#def modifyColumn():
+#
+
 
     
 
