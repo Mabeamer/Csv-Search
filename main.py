@@ -6,8 +6,10 @@ import pandas as pd
 
 #cv search function
 
-
+##TODO: CREATE AN OBJECT THAT HOLDS A LIST OF THESE VALUES TO REFERENCE THAT INSTEAD OF CONSISTENTLY REBUIDLING
 reader = csv.reader(open('us-area-code-cities.csv', encoding="utf8"))
+
+
 
 #display what line the user should search frm (area code example, city, state, long/lat)
 #once selected have them search
@@ -60,25 +62,26 @@ def main():
     userMenu = '0'
     #**TODO: menu loop
     while userMenu == '0':
-        print("How do you wish to edit this file?")
-        print("(1.)Add Row")
-        print("(2.)Delete Row  - !!This will write a new file to the main folder named outfile!!")
-        print("(3.)Sort file")
-        print("(4.)Modify column")
+            print("How do you wish to edit this file?")
+            print("(1.)Add Row")
+            print("(2.)Delete Row  - !!This will write a new file to the main folder named outfile!!")
+            print("(3.)Sort file")
+            print("(4.)Modify column")
 
-        userMenu = input("Menu Input: ")
+            userMenu = input("Menu Input: ")
         
-        if userMenu == '1':
-            print("Adding row....")
-            addList = addRow()
-            print(addList)
-        if userMenu == '2':
-            print("Deleting row....")
-            removeRow()
-        if userMenu == '3':
-            print("Sorting row....")
-        if userMenu == '4':
-            print("Modifying row....")
+            if userMenu == '1':
+                print("Adding row....")
+                addList = addRow()
+                print(addList)
+            if userMenu == '2':
+                print("Deleting row....")
+                removeRow()
+            if userMenu == '3':
+                print("Sorting row....")
+                sortRow()
+            if userMenu == '4':
+                print("Modifying row....")
 
 
 def addRow():
@@ -167,6 +170,40 @@ def removeRow():
 #def searchRow():
 #should search through the full list for a specific row the user is looking for
 #can look from just the name, would prefer to have it reference the whole column in the search and display from a list
+#can use weather search
+
+def sortRow():
+#ask the user which row they would like to sort
+        #print out one column and have them select a number to sort from [(1)973,Paterson,(2)New Jersey,(3)US,(4)40.91677,(5)-74.17181]
+        columnInfo = []
+        rowInput = input('')
+        for row in reader:
+            columnInfo.append(row)
+        print(columnInfo[0])
+        userInput = input("Please select the column number you wish to sort by")
+        #bork
+        userMenu = '0'
+    #**TODO: menu loop
+        while userMenu == '0':
+            print("How would you like to sort this file")
+            print("(a-z)")
+            print("(0-1)")
+            print("(z-1)")
+            print("(1-0)")
+
+            userMenu = input("Menu Input: ")
+            
+            if userMenu == '1':
+                print('(a-z) sort')
+            if userMenu == '2':
+                print("(0-1) sort")
+                removeRow()
+            if userMenu == '3':
+                print("(z-1)")
+            if userMenu == '4':
+                print("(1-0)")
+    #sort by ((a-z)(0-1)(z-1)(1-0))
+#display sorted outfile.
 
 
 #def modifyColumn():
