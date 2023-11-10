@@ -15,6 +15,7 @@ reader = csv.reader(open('us-area-code-cities.csv', encoding="utf8"))
 #once selected have them search
 #display all found references to file
 #passing in placeholder***
+#????
 def Search():
     ticker = 0
     numCheck = False
@@ -48,17 +49,23 @@ def Search():
 
 def main():
     class fileSearch:
-        def __init__(self, columnSearch,):
-            self.columnSearch = columnSearch
+        def __init__(self, userData):
+            self.userData = userData
 
-    #placeholder name
-    file = fileSearch("")
+    #placeholder name || allow the user to input a file and it will read from there
+    userFile = fileSearch("")
+    data = []
+    #uh
+    for row in reader:
+        data.append(row)
+    #dataframe of the users data
+    df = pd.DataFrame(data)
+    print(df)
 
     #for demo purposes this uses us-area-code-cities.csv
     print('Please insert file you wish to edit')
-    file.columnSearch = Search()
-    print(file.columnSearch, ' || columnSearch')
-
+    userFile.userData = df
+    
     userMenu = '0'
     #**TODO: menu loop
     while userMenu == '0':
@@ -79,10 +86,12 @@ def main():
                 removeRow()
             if userMenu == '3':
                 print("Sorting row....")
-                sortRow()
+                sortRow(userFile)
             if userMenu == '4':
                 print("Modifying row....")
+                modifyColumn(userFile)
 
+#TODO: both of these functions need to be rewritten to use the dataframe created in main.
 
 def addRow():
     #declaring variables
@@ -172,18 +181,20 @@ def removeRow():
 #can look from just the name, would prefer to have it reference the whole column in the search and display from a list
 #can use weather search
 
-def sortRow():
+def sortRow(userDataFrame):
 #ask the user which row they would like to sort
         #print out one column and have them select a number to sort from [(1)973,Paterson,(2)New Jersey,(3)US,(4)40.91677,(5)-74.17181]
-        columnInfo = []
-        rowInput = input('')
-        for row in reader:
-            columnInfo.append(row)
-        print(columnInfo[0])
-        userInput = input("Please select the column number you wish to sort by")
+        #lol
+        print(userDataFrame.userData)
+
+        sortedFrame = userDataFrame.userData
+
+        ##TODO: ALLOW THE USER TO PICK WHICH COLUMN THEY WISH TO EDIT 
+        #userInput = input("Please select the column number you wish to sort by")
         #bork
+        columnSort = input("Which column would you like to sort by?")
+
         userMenu = '0'
-    #**TODO: menu loop
         while userMenu == '0':
             print("How would you like to sort this file")
             print("(a-z)")
@@ -194,19 +205,23 @@ def sortRow():
             userMenu = input("Menu Input: ")
             
             if userMenu == '1':
-                print('(a-z) sort')
-            if userMenu == '2':
+                print("(a-z) sort")
+                #by=[users desired column]
+                sortedFrame.sort_values(axis = 1, ascending=True)
+            if userMenu == '2': 
                 print("(0-1) sort")
-                removeRow()
             if userMenu == '3':
-                print("(z-1)")
+                print("(z-1) sort")
             if userMenu == '4':
-                print("(1-0)")
+                print("(1-0) sort")
+
+        print(sortedFrame)
     #sort by ((a-z)(0-1)(z-1)(1-0))
 #display sorted outfile.
 
 
-#def modifyColumn():
+def modifyColumn(userDataFrame):
+    print(userDataFrame.userData)
 #
 
 
