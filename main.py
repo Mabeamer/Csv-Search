@@ -15,37 +15,6 @@ reader = csv.reader(open('us-area-code-cities.csv', encoding="utf8"))
 #once selected have them search
 #display all found references to file
 #passing in placeholder***
-#????
-def Search():
-    ticker = 0
-    numCheck = False
-    #ask user to load file, will be preloading us-area-code-cities
-    #print("Please load csv file for editing")
-
-    print("Please select the column you wish to search from (Row number starts from 0)")
-    #print(reader[1])
-    for row in reader:
-        #TODO: refactor this could be bool 
-        if ticker < 1:
-            print(row)
-            #user makes choice here, need to find out how to keep them in bounds so they don't throw an exception
-            rowInput = int(input("Row Selection: "))
-
-
-            ##bounderies check
-            while numCheck == False:
-                try:
-                    print(row[rowInput])
-                    x = rowInput
-                    numCheck = True
-                    #**CHECK THIS, returning rowInput to keep the row number in an object.
-                    return(x)
-                    #move back to driver after you know what row to work in, take information to be remembered.
-                except IndexError:
-                    # Index Out of Bound
-                    print("value doesnt exist")
-                    numCheck = True
-            ticker += 1
 
 def main():
     class fileSearch:
@@ -97,8 +66,7 @@ def addRow():
     #declaring variables
     userInformation = []
 
-    #reformat this, I dont know how to pull the number correctly so will hold it in a variable to be used as the row count
-    #inefficient, the loop is but we need to work around that
+    #reformat this
     for row in reader:
         rowInformation = row
         lengthHolder = int(len(row))
@@ -184,14 +152,12 @@ def removeRow():
 def sortRow(userDataFrame):
 #ask the user which row they would like to sort
         #print out one column and have them select a number to sort from [(1)973,Paterson,(2)New Jersey,(3)US,(4)40.91677,(5)-74.17181]
-        #lol
         print(userDataFrame.userData)
 
         sortedFrame = userDataFrame.userData
 
         ##TODO: ALLOW THE USER TO PICK WHICH COLUMN THEY WISH TO EDIT 
         #userInput = input("Please select the column number you wish to sort by")
-        #bork
         columnSort = input("Which column would you like to sort by?")
 
         userMenu = '0'
