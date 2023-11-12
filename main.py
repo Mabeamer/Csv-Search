@@ -170,8 +170,15 @@ def sortRow(userDataFrame):
             except:
                 print("Please select from one of the given column values.")
 
-        conformationMenu = 0
-
+        conformationMenu = False
+        while conformationMenu:
+            userInput = input("Write sort to new file?(Y/N)")
+            if userInput == "Y":
+                print('Writing...')
+            if userInput == "N":
+                #break loop send back to menu
+                return
+        
         
 
 #display sorted outfile.
