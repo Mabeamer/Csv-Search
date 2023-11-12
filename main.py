@@ -158,31 +158,22 @@ def sortRow(userDataFrame):
 
         ##TODO: ALLOW THE USER TO PICK WHICH COLUMN THEY WISH TO EDIT 
         #userInput = input("Please select the column number you wish to sort by")
-        columnSort = input("Which column would you like to sort by?")
+        #columnSort = input("Which column would you like to sort by?")
 
         userMenu = '0'
         while userMenu == '0':
-            print("How would you like to sort this file")
-            print("(a-z)")
-            print("(0-1)")
-            print("(z-1)")
-            print("(1-0)")
 
-            userMenu = input("Menu Input: ")
-            
-            if userMenu == '1':
-                print("(a-z) sort")
-                #by=[users desired column]
-                sortedFrame.sort_values(axis = 1, ascending=True)
-            if userMenu == '2': 
-                print("(0-1) sort")
-            if userMenu == '3':
-                print("(z-1) sort")
-            if userMenu == '4':
-                print("(1-0) sort")
+            userMenu = input("Which column would you like to sort by: ")
+            try:
+                sortedFrame = sortedFrame.sort_values(sortedFrame.columns[int(userMenu)])
+                print(sortedFrame)
+            except:
+                print("Please select from one of the given column values.")
 
-        print(sortedFrame)
-    #sort by ((a-z)(0-1)(z-1)(1-0))
+        conformationMenu = 0
+
+        
+
 #display sorted outfile.
 
 
