@@ -156,28 +156,29 @@ def sortRow(userDataFrame):
 
         sortedFrame = userDataFrame.userData
 
-        ##TODO: ALLOW THE USER TO PICK WHICH COLUMN THEY WISH TO EDIT 
-        #userInput = input("Please select the column number you wish to sort by")
-        #columnSort = input("Which column would you like to sort by?")
-
         userMenu = '0'
         while userMenu == '0':
 
             userMenu = input("Which column would you like to sort by: ")
-            try:
-                sortedFrame = sortedFrame.sort_values(sortedFrame.columns[int(userMenu)])
-                print(sortedFrame)
-            except:
-                print("Please select from one of the given column values.")
+            sortedFrame = sortedFrame.sort_values(sortedFrame.columns[int(userMenu)])
 
         conformationMenu = False
         while conformationMenu:
             userInput = input("Write sort to new file?(Y/N)")
             if userInput == "Y":
                 print('Writing...')
+                outputFile(sortedFrame)
             if userInput == "N":
                 #break loop send back to menu
                 return
+
+
+def outputFile(updatedDf):
+    file = open('outfile.csv', 'w+', newline='', encoding="utf-8")
+
+    with file:
+        write = csv.writer(file)
+        write.writerows(updatedDf)
         
         
 
